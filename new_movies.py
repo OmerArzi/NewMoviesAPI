@@ -96,5 +96,3 @@ for single_movie in movies_list:
     print("Genres:")
     for genre in single_movie[title]['gen']:
         print(f"{genre['genre']}")
-    print()
-print()
