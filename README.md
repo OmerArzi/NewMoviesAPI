@@ -3,7 +3,7 @@ This Lambda uses RapidAPI interface to get the closest 5 movies tagged with genr
 The Lambda function gets the movies' information from the free API : https://data-imdb1.p.rapidapi.com/movie/order/upcoming/  
 The movies then sorted by release date (primary sort) and alphabetic  
 (as a secondary sorting, in case two or more movies being released on the same date).  
-The information of <Name, Date, Description, Generes> displayed By Analyzing the json file and specifically displays those details. 
+The information of <Name, Date, Description, Generes> displayed By Analyzing the json file and specifically displays those details.  
 **The project uses AWS Lambda function (using query string parameters) and an Amazon API Gateway endpoint to trigger that function.**  
 ## Enter a formatted URL in the following way:  
 First enter https://lsu71o4toc.execute-api.us-east-2.amazonaws.com/default/coming_soon?genres=  
