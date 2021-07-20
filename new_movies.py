@@ -1,7 +1,6 @@
-import requests
 import json
+import requests
 from operator import itemgetter
-
 
 def get_movies_base_information():
     url = "https://data-imdb1.p.rapidapi.com/movie/order/upcoming/"
@@ -26,7 +25,7 @@ def get_summery_by_id(movie_id):
     return response
 
 
-def get_movies_detailed_information(movies_lst, genres_set):
+def get_movies_detailed_information(movies_lst, genres_list):
     movies_lst = order_by_release_date(movies_lst)
     to_remove = []
     for i in range(len(movies_lst)):
@@ -36,12 +35,8 @@ def get_movies_detailed_information(movies_lst, genres_set):
             detailed_req = get_summery_by_id(movies_lst[i]['imdb_id'])
             detailed_req = json.loads(json.dumps(detailed_req.json()))
             for j in range(len(detailed_req[movies_lst[i]['title']]['gen'])):
-                if detailed_req[movies_lst[i]['title']]['gen'][j]['genre'] in genres_set:
+                if detailed_req[movies_lst[i]['title']]['gen'][j]['genre'] in genres_list:
                     one_genre_at_list = True
-            if not one_genre_at_list:
-                for j in range(len(detailed_req[movies_lst[i]['title']]['keywords'])):
-                    if detailed_req[movies_lst[i]['title']]['keywords'][j]['keyword'] in genres_set:
-                        one_genre_at_list = True
             if not one_genre_at_list:
                 to_remove.append(movies_lst[i])
             else:
@@ -50,30 +45,7 @@ def get_movies_detailed_information(movies_lst, genres_set):
             movies_lst.remove(movies_lst[i])
     for i in range(len(to_remove)):
         movies_lst.remove(to_remove[i])
-    return movies_lst
-
-
-def get_genres_from_user():
-    genre_list = []
-    print("Enter as much as you like from the following genres (or write 'all' for all genres):")
-    print('Action       Horror\n'
-          'Adventure    Music\n'
-          'Animation    Musical\n'
-          'Biography    Mystery\n'
-          'Comedy       Romance\n'
-          'Crime        Sci-Fi\n'
-          'Documentary  Short Film\n'
-          'Drama        Sport\n'
-          'Family       Superhero\n'
-          'Fantasy      Thriller\n'
-          'Film-Noir    War\n'
-          'History      Western\n')
-    genres_str = input()
-    genre_list = genres_str.split(' ')
-    if 'Film-Noir' in genre_list:
-        genre_list.remove('Film-Noir')
-        genre_list.append('Film Noir')
-    return set(genre_list)
+    return movies_lst[:5]
 
 
 def order_by_release_date(movie_lst):
@@ -82,17 +54,34 @@ def order_by_release_date(movie_lst):
     return movie_lst
 
 
-movies = get_movies_base_information()
-movies_dict = json.loads(json.dumps(movies.json()))
-movies_list = list(movies_dict['Movies Upcoming'])
-Genres_set = get_genres_from_user()
-movies_list = get_movies_detailed_information(movies_list, Genres_set)
+def coming_soon(genres_list):
+    movies = get_movies_base_information()
+    movies_dict = json.loads(json.dumps(movies.json()))
+    movies_list = list(movies_dict['Movies Upcoming'])
+    movies_list = get_movies_detailed_information(movies_list, genres_list)
+    return movies_list
 
-for single_movie in movies_list:
-    title = single_movie['title']
-    print(f"Title: {title}")
-    print(f"Release Date: {single_movie['release']}")
-    print(f"Description: {single_movie[title]['description']}")
-    print("Genres:")
-    for genre in single_movie[title]['gen']:
-        print(f"{genre['genre']}")
+
+def generate_basic_info_dict(movies_list):
+    new_dict = {}
+    for movie in movies_list:
+        new_movie = {'Title': movie['title'],
+                     'Release Date': movie['release'],
+                     'Description': movie[movie['title']]['description'],
+                     'Genres': movie[movie['title']]['gen']}
+        new_dict[movie['title']] = new_movie
+    return new_dict
+    
+
+def lambda_handler(event, context):
+    genres_list = set(str(event["queryStringParameters"]["genres"]).split('+'))
+    movie_list = coming_soon(genres_list)
+    res = json.dumps(generate_basic_info_dict(movie_list))
+    return {
+        'statusCode': '200',
+        'body': res,
+        'headers': {
+            'Access-Control-Allow-Origin': 'https://master.d3k6fbvlxi2px3.amplifyapp.com', #used for my Aws Amplify App
+            'Content-Type': 'application/json',
+        },
+    }
