@@ -21,7 +21,7 @@ Thriller,War,
 History, Western.  
   
 **For example:**  
-If I want to recieve closest 5 action & comedy movies to be on screen, I'll enter the following URL:  
+If I want to recieve closest 5 action & comedy & Fantasy movies to be on screen, I'll enter the following URL:  
 https://lsu71o4toc.execute-api.us-east-2.amazonaws.com/default/coming_soon?genres=Action+Comedy+Fantasy
 
 **The JSON output will be, (updated to today's date:)**  
