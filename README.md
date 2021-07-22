@@ -15,7 +15,7 @@ Comedy,       Romance,
 Crime,        Sci-Fi,  
 Documentary,  Short Film,  
 Drama,        Sport,  
-Family,       Fantasy, 
+Family,       Fantasy,  
 Thriller,     War,  
 History,      Western.  
   
