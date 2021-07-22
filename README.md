@@ -20,7 +20,7 @@ Thriller,War,
 History, Western.  
   
 **A GET request, For example:**  
-If I want to recieve closest 5 action movies to be on screen, I'll enter the following URL:  
+If I want to recieve the closest 5 action movies to be on screen, I'll enter the following URL:  
 https://lsu71o4toc.execute-api.us-east-2.amazonaws.com/default/coming_soon?genres=Action
 
 
@@ -67,9 +67,9 @@ https://lsu71o4toc.execute-api.us-east-2.amazonaws.com/default/coming_soon?genre
       }  
     ]  
   },  
-  **...**  
-  **...**  
-  **...**  
+  ...  
+  ...  
+  ...  
   "Hotel Transylvania: Transformania": {  
     "Title": "Hotel Transylvania: Transformania",  
     "Release Date": "2021-08-05",  
@@ -79,9 +79,9 @@ https://lsu71o4toc.execute-api.us-east-2.amazonaws.com/default/coming_soon?genre
         "id": 4,  
         "genre": "Adventure"  
       },  
-      **...  **  
-      **...  **  
-      **...  **  
+      ...  
+      ...  
+      ...  
       {  
         "id": 28,  
         "genre": "Horror"  
