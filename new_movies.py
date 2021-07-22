@@ -5,7 +5,6 @@ from operator import itemgetter
 
 def get_movies_base_information():
     url = "https://data-imdb1.p.rapidapi.com/movie/order/upcoming/"
-    # generes = {'Action': 'Action', 'Drama': 'Drama'}
     headers = \
         {
             'x-rapidapi-key': '536f37d223msh3a1b16637225a9fp12499djsn62c02055bd2e',
@@ -74,8 +73,7 @@ def generate_basic_info_dict(movies_list):
     
 
 def lambda_handler(event, context):
-    #genres_list = set(str(event["queryStringParameters"]["genres"]).split('+'))
-    genres_list = ["Action"]
+    genres_list = set(str(event["queryStringParameters"]["genres"]).split('+'))
     movie_list = coming_soon(genres_list)
     res = json.dumps(generate_basic_info_dict(movie_list))
     return {
