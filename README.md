@@ -90,4 +90,4 @@ https://lsu71o4toc.execute-api.us-east-2.amazonaws.com/default/coming_soon?genre
   }  
 }  
 ```
-(*be notice that the quntity of the movies returned depends on movies' release dates in those specific genres.)
+(*be notice that the quantity of the movies returned depends on movies' release dates in those specific genres, too.)
