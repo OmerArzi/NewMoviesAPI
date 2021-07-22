@@ -1,3 +1,4 @@
+import boto3
 import json
 import requests
 from operator import itemgetter
@@ -27,7 +28,7 @@ def get_summery_by_id(movie_id):
 
 def get_movies_detailed_information(movies_lst, genres_list):
     movies_lst = order_by_release_date(movies_lst)
-    to_remove = []
+    res = []
     for i in range(len(movies_lst)):
         try:
             one_genre_at_list = False
@@ -36,16 +37,13 @@ def get_movies_detailed_information(movies_lst, genres_list):
             detailed_req = json.loads(json.dumps(detailed_req.json()))
             for j in range(len(detailed_req[movies_lst[i]['title']]['gen'])):
                 if detailed_req[movies_lst[i]['title']]['gen'][j]['genre'] in genres_list:
-                    one_genre_at_list = True
-            if not one_genre_at_list:
-                to_remove.append(movies_lst[i])
-            else:
-                movies_lst[i].update(detailed_req)
+                    res.append(detailed_req)
+                    break
+            if len(res) == 5:
+                return res
         except:
             movies_lst.remove(movies_lst[i])
-    for i in range(len(to_remove)):
-        movies_lst.remove(to_remove[i])
-    return movies_lst[:5]
+    return res
 
 
 def order_by_release_date(movie_lst):
@@ -64,17 +62,20 @@ def coming_soon(genres_list):
 
 def generate_basic_info_dict(movies_list):
     new_dict = {}
+    movies_list = list(movies_list)
     for movie in movies_list:
-        new_movie = {'Title': movie['title'],
-                     'Release Date': movie['release'],
-                     'Description': movie[movie['title']]['description'],
-                     'Genres': movie[movie['title']]['gen']}
-        new_dict[movie['title']] = new_movie
+        itemed_movie = (list(dict(movie).values()))[0]
+        new_movie = {'Title': itemed_movie['title'],
+                     'Release Date': itemed_movie['release'],
+                     'Description': itemed_movie['description'],
+                     'Genres': itemed_movie['gen']}
+        new_dict[new_movie['Title']] = new_movie
     return new_dict
     
 
 def lambda_handler(event, context):
-    genres_list = set(str(event["queryStringParameters"]["genres"]).split('+'))
+    #genres_list = set(str(event["queryStringParameters"]["genres"]).split('+'))
+    genres_list = ["Action"]
     movie_list = coming_soon(genres_list)
     res = json.dumps(generate_basic_info_dict(movie_list))
     return {
