@@ -7,17 +7,17 @@ The information of <Name, Date, Description, Genres> displayed By Analyzing the 
 ## Enter a formatted URL in the following way:  
 First enter https://lsu71o4toc.execute-api.us-east-2.amazonaws.com/default/coming_soon?genres=  
 **following by one of the following genres:**  
-Action, Horror,  
-Adventure, Music,  
-Animation, Musical,  
-Biography, Mystery,  
-Comedy, Romance,  
-Crime, Sci Fi,  
-Documentary, Short Film,  
-Drama, Sport,  
-Family, Fantasy, 
-Thriller,War,  
-History, Western.  
+Action,       Horror,  
+Adventure,    Music,  
+Animation,    Musical,  
+Biography,    Mystery,  
+Comedy,       Romance,  
+Crime,        Sci-Fi,  
+Documentary,  Short Film,  
+Drama,        Sport,  
+Family,       Fantasy, 
+Thriller,     War,  
+History,      Western.  
   
 **A GET request, For example:**  
 If I want to recieve the closest 5 action movies to be on screen, I'll enter the following URL:  
