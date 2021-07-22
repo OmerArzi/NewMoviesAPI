@@ -25,7 +25,7 @@ https://lsu71o4toc.execute-api.us-east-2.amazonaws.com/default/coming_soon?genre
 
 
 **The JSON output will be, (updated to today's date:)**  
-...  
+``` 
 {  
   "Trollhunters: Rise of the Titans": {  
     "Title": "Trollhunters: Rise of the Titans",  
@@ -89,5 +89,5 @@ https://lsu71o4toc.execute-api.us-east-2.amazonaws.com/default/coming_soon?genre
     ]  
   }  
 }  
-...  
+```
 (*be notice that the quntity of the movies returned depends on movies' release dates in those specific genres.)
