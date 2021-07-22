@@ -24,6 +24,10 @@ History, Western.
 If I want to recieve closest 5 action & comedy & Fantasy movies to be on screen, I'll enter the following URL:  
 https://lsu71o4toc.execute-api.us-east-2.amazonaws.com/default/coming_soon?genres=Action+Comedy+Fantasy
 
+# Note: This is an ideal situation, where my user doesn't restricted by memory usage limit.  
+#       **1 parameter (genre) should work just fine, but more than one, most of the times, will give you**  
+#       **an empty output, unfortunatly**  
+
 **The JSON output will be, (updated to today's date:)**  
 {  
   "Trollhunters: Rise of the Titans": {  
