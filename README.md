@@ -13,11 +13,11 @@ Animation,    Musical,
 Biography,    Mystery,  
 Comedy,       Romance,  
 Crime,        Sci-Fi,  
-Documentary,  Short Film,  
-Drama,        Sport,  
-Family,       Fantasy,  
-Thriller,     War,  
-History,      Western.  
+Documentary,  Sport, 
+Drama,        Fantasy,  
+Family,       War,  
+Thriller,     Western
+History      
   
 **A GET request, For example:**  
 If I want to recieve the closest 5 action movies to be on screen, I'll enter the following URL:  
