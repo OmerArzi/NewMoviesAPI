@@ -7,8 +7,8 @@ def get_movies_base_information():
     url = "https://data-imdb1.p.rapidapi.com/movie/order/upcoming/"
     headers = \
         {
-            'x-rapidapi-key': '536f37d223msh3a1b16637225a9fp12499djsn62c02055bd2e',
-            'x-rapidapi-host': 'data-imdb1.p.rapidapi.com'
+            'x-rapidapi-key': #'key',
+            'x-rapidapi-host': #'host number'
         }
     response = requests.request("GET", url, headers=headers)  # params=generes)
     return response
